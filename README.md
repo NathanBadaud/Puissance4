@@ -1,4 +1,5 @@
-# Puissance Engine 4
-EPSI B3 - Projet Android 
+#ANDROID
 
-Projet Androidien
+Nom du projet : Puissance Engine 4
+
+Groupe : Matthieu BOUTIN, Nathan BADAUD, Benjamin TESSIER
