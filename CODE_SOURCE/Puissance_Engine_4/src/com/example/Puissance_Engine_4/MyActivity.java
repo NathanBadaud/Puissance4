@@ -35,5 +35,16 @@ public class MyActivity extends Activity {
 
 
         });
+
+        ButtonMulti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyActivity.this, World.class);
+                startActivity(intent);
+            };
+
+
+        });
+
     }
 }
