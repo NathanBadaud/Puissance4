@@ -4,10 +4,35 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
-    <TextView
+
+    <Button android:id="@+id/Title"
+            android:text="Puissance Engine 4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World, MyActivity"
+            android:layout_weight="1"
+            android:textSize="24pt"
+            android:background="@android:color/holo_red_dark"
+            android:clickable="true"/>
+    <Button
+            android:id="@+id/MultiButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Multijoueurs"
+            android:layout_weight="3"
+            android:textSize="15pt"/>
+
+
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:id="@+id/IAButton"
+            android:text="Contre l'Ordinateur"
+            android:layout_weight="3"
+            android:textSize="15pt"
             />
+    <Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:id="@+id/settings"
+            android:text="Paramètres"
+            android:layout_weight="1"
+            android:textSize="12pt"
+            android:background="@android:color/holo_blue_dark"/>
 </LinearLayout>
 
