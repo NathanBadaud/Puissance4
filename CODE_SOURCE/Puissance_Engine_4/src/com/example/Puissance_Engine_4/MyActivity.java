@@ -39,10 +39,20 @@ public class MyActivity extends Activity {
         ButtonMulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyActivity.this, World.class);
+                Intent intent = new Intent(MyActivity.this, Acticity_Multi.class);
                 startActivity(intent);
-            };
+            }
 
+        });
+
+        ButtonIA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyActivity.this, Acticity_Multi.class);
+                startActivity(intent);
+            }
+
+            ;
 
         });
 

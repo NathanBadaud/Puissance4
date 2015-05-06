@@ -13,6 +13,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsMenu"/>
-        <activity android:name=".World"/>
+        <activity android:name=".Acticity_Multi"/>
     </application>
 </manifest>

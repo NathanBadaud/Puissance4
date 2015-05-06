@@ -6,9 +6,10 @@ import android.os.Bundle;
 /**
  * Created by matthieu on 06/05/2015.
  */
-public class World extends Activity {
+public class Activity_IA extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.ia_game_display);
     }
 }
