@@ -1,0 +1,93 @@
+﻿Vérification victoire
+
+//check retourne 1 si la couleur renseignée est la même que le pion renseigné
+
+//Récupérer les coordonnées du dernier pion placé, ainsi que sa couleur :
+
+x = dernierPionX;
+y = dernierPionY;
+couleur = getCouleur(x, y);
+victoire = 0;
+
+//victoire verticale
+if (y >= 4) {
+	if (check(couleur, x, y-1)+check(couleur, x, y-2)+check(couleur, x, y-3) == 3) {
+		return 1;
+}
+
+//victoires horizontales
+if (x >= 2 && x <= plateau.largeur-2) {
+	if (check(couleur, x-1, y)+check(couleur, x+1, y)+check(couleur, x+2, y) == 3) {
+		return 2;
+	}
+}
+
+if (x >= 3 && x <= plateau.largeur-1) {
+	if (check(couleur, x-2, y)+check(couleur, x-1, y)+check(couleur, x+1, y) == 3) {
+		return 3;
+	}
+}
+
+if (x <= plateau.largeur-3) {
+	if (check(couleur, x+1, y)+check(couleur, x+2, y)+check(couleur, x+3, y) == 3) {
+		return 4;
+	}
+}
+
+if (x >= 4) {
+	if (check(couleur, x-3, y)+check(couleur, x-2, y)+check(couleur, x-1, y) == 3) {
+		return 5;
+	}
+}
+
+//victoires diagonale bas-gauche, haut-droit
+if (x >= 2 && x <= plateau.largeur-2 && y >= 2 && y <= plateau.hauteur-2) {
+	if (check(couleur, x-1, y-1)+check(couleur, x+1, y+1)+check(couleur, x+2, y+2) == 3) {
+		return 6;
+	}
+}
+
+if (x >= 3 && x <= plateau.largeur-1 && y >= 3 && y <= plateau.hauteur-1) {
+	if (check(couleur, x-2, y-2)+check(couleur, x-1, y-1)+check(couleur, x+1, y+1) == 3) {
+		return 7;
+	}
+}
+
+if (x <= plateau.largeur-3 && y <= plateau.hauteur-3) {
+	if (check(couleur, x+1, y+1)+check(couleur, x+2, y+2)+check(couleur, x+3, y+3) == 3) {
+		return 8;
+	}
+}
+
+if (x >= 4 && y >= 4) {
+	if (check(couleur, x-3, y-3)+check(couleur, x-2, y-2)+check(couleur, x-1, y-1) == 3) {
+		return 9;
+	}
+}
+
+//victoires diagonale haut-gauche, bas-droit
+if (x >= 1 && x <= plateau.largeur-2 && y >= 3 && y <= plateau.hauteur-1) {
+	if check(couleur, x-1, y+1)+check(couleur, x+1, y-1)+check(couleur, x+2, y-2) == 3) {
+		return 10;
+	}
+}
+
+if (x >= 2 && x <= plateau.largeur-1 && y >= 2 && y <= plateau.hauteur-2) {
+	if (check(couleur, x-2, y-2)+check(couleur, x-1, y-1)+check(couleur, x+1, y+1) == 3) {
+		return 11;
+	}
+}
+
+if (x >= 4 && y <= plateau.hauteur-3) {
+	if (check(couleur, x-3, y+3)+check(couleur, x-2, y+2)+check(couleur, x-1, y+1) == 3) {
+		return 12;
+	}
+}
+
+if (x <= plateau.largeur-3 && y <= 4) {
+	if (check(couleur, x+1, y-1)+check(couleur, x+2, y-2)+check(couleur, x+3, y-3) == ) {
+		return 13;
+	}
+}
+
+return 0;
