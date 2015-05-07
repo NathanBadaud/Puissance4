@@ -14,5 +14,6 @@
         </activity>
         <activity android:name=".SettingsMenu"/>
         <activity android:name=".Activity_Multi"/>
+        <activity android:name=".Activity_IA"/>
     </application>
 </manifest>
