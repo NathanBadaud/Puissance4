@@ -13,6 +13,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsMenu"/>
+<<<<<<< HEAD
         <activity android:name=".Activity_Multi"/>
+=======
+        <activity android:name=".Acticity_Multi"/>
+>>>>>>> no message
     </application>
 </manifest>
