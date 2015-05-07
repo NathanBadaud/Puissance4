@@ -48,7 +48,7 @@ public class MyActivity extends Activity {
         ButtonIA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyActivity.this, Activity_Multi.class);
+                Intent intent = new Intent(MyActivity.this, Activity_IA.class);
                 startActivity(intent);
             }
 
