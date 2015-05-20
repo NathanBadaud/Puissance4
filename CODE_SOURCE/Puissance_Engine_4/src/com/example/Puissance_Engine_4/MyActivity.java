@@ -14,7 +14,7 @@ public class MyActivity extends Activity {
     Button ButtonMulti;
     Button ButtonIA;
     Button ButtonSettings;
-    Activity SettingsMenuActivity;
+    //Activity SettingsMenuActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MyActivity extends Activity {
         ButtonIA = (Button) findViewById(R.id.IAButton);
         ButtonSettings = (Button) findViewById(R.id.settings);
 
+				//Démarrage des SETTINGS
         ButtonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +37,7 @@ public class MyActivity extends Activity {
 
         });
 
+				//Démarrage du jeu MULTIJOUEURS
         ButtonMulti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +47,7 @@ public class MyActivity extends Activity {
 
         });
 
+				//Démarrage du jeu SOLO
         ButtonIA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

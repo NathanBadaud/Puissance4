@@ -13,9 +13,8 @@ public class SettingsMenu extends Activity {
     Button ButtonMusique;
     Button ButtonSong;
     Button ButtonLangues;
-    TextView TitleSettings;
-    Button About;
-
+    Button ButtonAbout;
+		TextView TitleSettings;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +23,7 @@ public class SettingsMenu extends Activity {
         ButtonMusique = (Button) findViewById(R.id.buttonMusique);
         ButtonLangues = (Button) findViewById(R.id.buttonLangue);
         ButtonSong = (Button) findViewById(R.id.buttonSong);
+				ButtonAbout = (Button) findViewById(R.id.buttonAbout);
         TitleSettings = (TextView) findViewById(R.id.TitleSettings);
-
     }
 }
