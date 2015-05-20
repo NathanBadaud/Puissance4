@@ -23,7 +23,7 @@ public class SettingsMenu extends Activity {
         ButtonMusique = (Button) findViewById(R.id.buttonMusique);
         ButtonLangues = (Button) findViewById(R.id.buttonLangue);
         ButtonSong = (Button) findViewById(R.id.buttonSong);
-				ButtonAbout = (Button) findViewById(R.id.buttonAbout);
+        ButtonAbout = (Button) findViewById(R.id.buttonAbout);
         TitleSettings = (TextView) findViewById(R.id.TitleSettings);
     }
 }

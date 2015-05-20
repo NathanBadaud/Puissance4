@@ -2,6 +2,7 @@ package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.GridView;
 import android.widget.TextView;
 
 /**
@@ -18,5 +19,9 @@ public class Activity_Multi extends Activity {
 
 				nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
 				nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
+
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this));
+
     }
 }
