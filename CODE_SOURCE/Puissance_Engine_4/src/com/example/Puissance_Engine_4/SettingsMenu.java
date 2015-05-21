@@ -2,6 +2,7 @@ package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import org.w3c.dom.Text;
@@ -18,6 +19,7 @@ public class SettingsMenu extends Activity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.settings_display);
 
         ButtonMusique = (Button) findViewById(R.id.buttonMusique);
