@@ -45,8 +45,11 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:gravity="center" android:weightSum="1">
+
+
         <GridView xmlns:android="http://schemas.android.com/apk/res/android"
                   android:id="@+id/gridview"
+
                   android:layout_width="174dp"
                   android:layout_height="176dp"
                   android:columnWidth="107dp"
