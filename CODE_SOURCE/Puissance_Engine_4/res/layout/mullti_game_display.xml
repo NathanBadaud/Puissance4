@@ -49,7 +49,7 @@
                   android:id="@+id/gridview"
                   android:layout_width="174dp"
                   android:layout_height="176dp"
-                  android:columnWidth="100dp"
+                  android:columnWidth="107dp"
                   android:numColumns="7"
                   android:verticalSpacing="-6dp"
                   android:horizontalSpacing="-130dp"

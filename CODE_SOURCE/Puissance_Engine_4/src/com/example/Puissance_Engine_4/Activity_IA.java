@@ -1,7 +1,9 @@
 package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -24,5 +26,14 @@ public class Activity_IA extends Activity {
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ImageAdapter(this));
+
+			/* imageView.setLayoutParams(new GridView.LayoutParams(dpToPixel(150),dpToPixel(150)));
+
+				private float dpToPixel(int dp)	{
+						Resources resources = this.getResources();
+						DisplayMetrics metrics = resources.getDisplayMetrics();
+						float px = dp * (metrics.densityDpi / 160f);
+						return px;
+				}	*/
     }
 }
