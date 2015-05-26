@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
  * Created by matthieu on 06/05/2015.
  */
 public class Activity_IA extends Activity {
-    TextView nomJoueur1;
-    TextView nomJoueur2;
+    TextView nomJoueur1, nomJoueur2;
+    private LinearLayout grille;
+    public TextView vuePlateau[][];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,16 +27,28 @@ public class Activity_IA extends Activity {
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+//        GridView gridview = (GridView) findViewById(R.id.gridview);
+//        gridview.setAdapter(new ImageAdapter(this));
 
-			/* imageView.setLayoutParams(new GridView.LayoutParams(dpToPixel(150),dpToPixel(150)));
+        vuePlateau = new TextView[6][7];
+        grille = (LinearLayout) findViewById(R.id.grille);
 
-				private float dpToPixel(int dp)	{
-						Resources resources = this.getResources();
-						DisplayMetrics metrics = resources.getDisplayMetrics();
-						float px = dp * (metrics.densityDpi / 160f);
-						return px;
-				}	*/
+        for (int i = 5; i >= 0; i--) {
+            LinearLayout ligne = new LinearLayout(this);
+            ligne.setOrientation(LinearLayout.HORIZONTAL);
+
+            for (int j = 0; j <= 6; j++) {
+                vuePlateau[i][j] = new TextView(this);
+                vuePlateau[i][j]
+                        .setLayoutParams(new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+                vuePlateau[i][j]
+                        .setBackgroundResource(R.drawable.case_vide);
+
+                ligne.addView(vuePlateau[i][j]);
+            }
+            grille.addView(ligne);
+        }
     }
 }
