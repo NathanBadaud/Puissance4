@@ -42,7 +42,7 @@ public class Activity_Multi extends Activity {
                                 ViewGroup.LayoutParams.WRAP_CONTENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT, 1));
                 vuePlateau[i][j]
-                        .setBackgroundResource(R.drawable.pionjaune);
+                        .setBackgroundResource(R.drawable.case_vide);
 
                 ligne.addView(vuePlateau[i][j]);
             }

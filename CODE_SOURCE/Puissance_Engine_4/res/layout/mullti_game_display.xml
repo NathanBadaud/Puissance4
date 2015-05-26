@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:weightSum="1">
+              android:layout_height="match_parent"
+              android:weightSum="1">
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content">
@@ -26,27 +27,27 @@
                   android:layout_marginBottom="10dp">
 
         <TextView android:id="@+id/nomJoueur1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="75dp"
-                android:layout_weight="50"
-                android:textSize="10pt"
-                android:text="Joueur1"/>
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="75dp"
+                  android:layout_weight="50"
+                  android:textSize="10pt"
+                  android:text="Joueur1"/>
 
         <TextView android:id="@+id/nomJoueur2"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="40dp"
-                android:layout_weight="50"
-                android:textSize="10pt"
-                android:text="Joueur2" />
+                  android:layout_width="fill_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginLeft="40dp"
+                  android:layout_weight="50"
+                  android:textSize="10pt"
+                  android:text="Joueur2" />
     </LinearLayout>
     <LinearLayout
             android:id="@+id/grille"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:animateLayoutChanges="true" >
-
+            android:animateLayoutChanges="true"
+            android:layout_marginTop="200dp">
     </LinearLayout>
 </LinearLayout>
