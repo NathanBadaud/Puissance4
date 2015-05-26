@@ -41,24 +41,12 @@
                 android:textSize="10pt"
                 android:text="Joueur2" />
     </LinearLayout>
-    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/GridLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:columnCount="7"
-                android:rowCount="6"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+    <LinearLayout
+            android:id="@+id/grille"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true" >
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/gridview"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:numColumns="7"
-              android:gravity="center"
-              android:background="#0033CC"
-              android:layout_weight="0.55"
-              android:layout_marginTop="150dp"/>
-    </GridLayout>
+    </LinearLayout>
 </LinearLayout>
