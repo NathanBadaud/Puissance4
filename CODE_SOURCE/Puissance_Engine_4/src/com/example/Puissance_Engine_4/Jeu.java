@@ -8,6 +8,35 @@ public class Jeu {
 		public int dernierPionX;
 		public int dernierPionY;
 
+		//Constructeur
+		public Jeu(int tour, int dernierPionX, int dernierPionY) {
+				this.tour = tour;
+				this.dernierPionX = dernierPionX;
+				this.dernierPionY = dernierPionY;
+		}
+
+		//Getters
+		public int getTour() {
+				return tour;
+		}
+		public int getDernierPionX() {
+				return dernierPionX;
+		}
+		public int getDernierPionY() {
+				return dernierPionY;
+		}
+		
+		//Setters
+		public void setTour(int tour) {
+				this.tour = tour;
+		}
+		public void getDernierPionX(int dernierPionX) {
+				this.dernierPionX = dernierPionX;
+		}
+		public void getDernierPionY(int dernierPionY) {
+				this.dernierPionY = dernierPionY;
+		}
+
 		public void initialiser() {
 
 		}
