@@ -7,15 +7,17 @@ public class Jeu {
 		public int tour;
 		public int dernierPionX;
 		public int dernierPionY;
+		public Plateau plateau;
 
 		//Constructeur
-		public Jeu(int tour, int dernierPionX, int dernierPionY) {
+		public Jeu(int tour, int dernierPionX, int dernierPionY, Plateau plateau) {
 				this.tour = tour;
 				this.dernierPionX = dernierPionX;
 				this.dernierPionY = dernierPionY;
+				this.plateau = plateau;
 		}
 
-		//Getters
+		/*		Getters
 		public int getTour() {
 				return tour;
 		}
@@ -24,9 +26,9 @@ public class Jeu {
 		}
 		public int getDernierPionY() {
 				return dernierPionY;
-		}
-		
-		//Setters
+		}		*/
+
+		/*		Setters
 		public void setTour(int tour) {
 				this.tour = tour;
 		}
@@ -35,9 +37,13 @@ public class Jeu {
 		}
 		public void getDernierPionY(int dernierPionY) {
 				this.dernierPionY = dernierPionY;
+		}		*/
+
+		public void initialiser(int hauteur, int largeur) {
+				this.plateau = new Plateau(hauteur, largeur);
 		}
 
-		public void initialiser() {
+		public void nouvellePartie() {
 
 		}
 
