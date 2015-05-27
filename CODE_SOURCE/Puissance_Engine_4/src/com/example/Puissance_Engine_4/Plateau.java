@@ -6,7 +6,7 @@ package com.example.Puissance_Engine_4;
 public class Plateau {
     public int largeur, hauteur;
 
-    public void CreerPlateau(int hauteur, int largeur) {
+    public void creerPlateau(int hauteur, int largeur) {
         this.hauteur = hauteur;
         this.largeur = largeur;
     }
