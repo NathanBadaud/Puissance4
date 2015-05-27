@@ -10,11 +10,10 @@ public class Jeu {
 		public Plateau plateau;
 
 		//Constructeur
-		public Jeu(int tour, int dernierPionX, int dernierPionY, Plateau plateau) {
+		public Jeu(int tour, int dernierPionX, int dernierPionY) {
 				this.tour = tour;
 				this.dernierPionX = dernierPionX;
 				this.dernierPionY = dernierPionY;
-				this.plateau = plateau;
 		}
 
 		/*		Getters
