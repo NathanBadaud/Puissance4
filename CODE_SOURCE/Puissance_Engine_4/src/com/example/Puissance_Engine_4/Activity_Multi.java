@@ -2,6 +2,7 @@ package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.GridView;
@@ -25,9 +26,6 @@ public class Activity_Multi extends Activity {
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
 
-//        GridView gridview = (GridView) findViewById(R.id.gridview);
-//        gridview.setAdapter(new ImageAdapter(this));
-
         vuePlateau = new TextView[6][7];
         grille = (LinearLayout) findViewById(R.id.grille);
 
@@ -44,10 +42,18 @@ public class Activity_Multi extends Activity {
                 vuePlateau[i][j]
                         .setBackgroundResource(R.drawable.case_vide);
 
+								//Ajoute un clickListener sur le plateau de jeu
+								vuePlateau[i][j]
+												.setOnClickListener(new View.OnClickListener() {
+														@Override
+														public void onClick(View view) {
+
+														}
+												});
+
                 ligne.addView(vuePlateau[i][j]);
             }
             grille.addView(ligne);
         }
-
     }
 }
