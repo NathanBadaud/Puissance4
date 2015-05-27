@@ -8,7 +8,7 @@ public class Case {
     public String statutCase;
     public Pion pion;
 
-    public void creerCase(int positionX, int positionY) {
+    public Case(int positionX, int positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
         this.statutCase = "libre";

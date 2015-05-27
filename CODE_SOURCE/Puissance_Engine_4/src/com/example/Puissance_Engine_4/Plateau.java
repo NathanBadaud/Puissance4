@@ -5,9 +5,14 @@ package com.example.Puissance_Engine_4;
  */
 public class Plateau {
     public int largeur, hauteur;
+    public Colonne colonnes[];
 
-    public void creerPlateau(int hauteur, int largeur) {
+    public Plateau(int hauteur, int largeur) {
         this.hauteur = hauteur;
         this.largeur = largeur;
+
+        for (int i = 0; i < largeur; i++) {
+            this.colonnes[i] = new Colonne(largeur, hauteur);
+        }
     }
 }
