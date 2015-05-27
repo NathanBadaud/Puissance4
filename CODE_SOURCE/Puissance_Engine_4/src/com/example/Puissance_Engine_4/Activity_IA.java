@@ -21,6 +21,7 @@ public class Activity_IA extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Supression du titre de l'application
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.ia_game_display);
 
