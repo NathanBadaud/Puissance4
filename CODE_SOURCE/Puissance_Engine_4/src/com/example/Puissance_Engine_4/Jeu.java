@@ -8,6 +8,7 @@ public class Jeu {
 		public int dernierPionX;
 		public int dernierPionY;
 		public Plateau plateau;
+		public Joueur[] joueur = new Joueur[2];
 
 		//Constructeur
 		public Jeu(int tour, int dernierPionX, int dernierPionY) {
@@ -16,7 +17,29 @@ public class Jeu {
 				this.dernierPionY = dernierPionY;
 		}
 
-		/*		Getters
+		public void initialiser(int hauteur, int largeur, Joueur joueur1, Joueur joueur2) {
+				this.plateau = new Plateau(hauteur, largeur);
+				joueur[0] = joueur1;
+				joueur[1] = joueur2;
+		}
+
+		public void nouvellePartie() {
+
+		}
+
+		public void affichageGraphique() {
+
+		}
+
+		public static int determinerVictoire() {
+				return 0;
+		}
+
+		public void afficherVainqueur() {
+
+		}
+
+				/*		Getters
 		public int getTour() {
 				return tour;
 		}
@@ -37,24 +60,4 @@ public class Jeu {
 		public void getDernierPionY(int dernierPionY) {
 				this.dernierPionY = dernierPionY;
 		}		*/
-
-		public void initialiser(int hauteur, int largeur) {
-				this.plateau = new Plateau(hauteur, largeur);
-		}
-
-		public void nouvellePartie() {
-
-		}
-
-		public void affichageGraphique() {
-
-		}
-
-		public static int determinerVictoire() {
-				return 0;
-		}
-
-		public void afficherVainqueur() {
-
-		}
 }
