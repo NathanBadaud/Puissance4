@@ -17,6 +17,11 @@ public class Case {
     public void affecterPion(Joueur proprietaire) {
         this.proprietaire = proprietaire;
         this.proprietaire.pionsRestants -= 1;
-        this.statutCase = "occupée";
+        this.statutCase = "occupee";
+    }
+
+    public void reinitialiserCase() {
+        this.proprietaire = null;
+        this.statutCase = "libre";
     }
 }
