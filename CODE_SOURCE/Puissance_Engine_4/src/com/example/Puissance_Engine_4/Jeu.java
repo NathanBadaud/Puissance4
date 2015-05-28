@@ -23,8 +23,16 @@ public class Jeu {
 				joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
 		}
 
-		public void nouvellePartie() {
+		public void nouvellePartie(int hauteur, int largeur) {
+				//réinitialisation du nombre de pions des joueurs
+				joueurs[0].pionsRestants = hauteur*largeur/2;
+				joueurs[1].pionsRestants = hauteur*largeur/2;
 
+				for (int i = 0; i < plateau.largeur; i++) {
+						for (int j = 0; j < plateau.hauteur; j++) {
+								plateau.colonnes[largeur].cases[hauteur].reinitialiserCase();
+						}
+				}
 		}
 
 		public void affichageGraphique() {
