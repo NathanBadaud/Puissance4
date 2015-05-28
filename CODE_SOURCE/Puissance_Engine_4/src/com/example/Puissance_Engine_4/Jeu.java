@@ -30,7 +30,7 @@ public class Jeu {
 
 				for (int i = 0; i < plateau.largeur; i++) {
 						for (int j = 0; j < plateau.hauteur; j++) {
-								plateau.colonnes[largeur].cases[hauteur].reinitialiserCase();
+								plateau.colonnes[i].cases[j].reinitialiserCase();
 						}
 				}
 		}
