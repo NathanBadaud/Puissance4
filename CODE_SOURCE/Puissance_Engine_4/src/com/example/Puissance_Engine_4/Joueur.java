@@ -9,7 +9,6 @@ public class Joueur {
 		public int pionsRestants;
 		public String couleur;
 		public boolean actif;
-		public Pion pions[];
 
 		//Constructeur
 		public Joueur(String nom, String couleur, int pions) {
@@ -18,10 +17,6 @@ public class Joueur {
 				this.score = 0;
 				this.pionsRestants = pions;
 				this.actif = false;
-
-				for (int i = 0; i < pions; i++) {
-					this.pions[i] = new Pion(this);
-				}
 		}
 
 		public void afficherNom() {

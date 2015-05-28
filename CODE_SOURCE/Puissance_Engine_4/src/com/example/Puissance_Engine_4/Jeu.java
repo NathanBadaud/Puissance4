@@ -8,7 +8,7 @@ public class Jeu {
 		public int dernierPionX;
 		public int dernierPionY;
 		public Plateau plateau;
-		public Joueur[] joueur = new Joueur[2];
+		public Joueur joueurs[];
 
 		//Constructeur
 		public Jeu(int tour, int dernierPionX, int dernierPionY) {
@@ -17,10 +17,10 @@ public class Jeu {
 				this.dernierPionY = dernierPionY;
 		}
 
-		public void initialiser(int hauteur, int largeur, Joueur joueur1, Joueur joueur2) {
+		public void initialiser(int hauteur, int largeur, String nomJoueur1, String nomJoueur2) {
 				this.plateau = new Plateau(hauteur, largeur);
-				joueur[0] = joueur1;
-				joueur[1] = joueur2;
+				joueurs[0] = new Joueur(nomJoueur1, "jaune", hauteur*largeur/2);
+				joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
 		}
 
 		public void nouvellePartie() {
