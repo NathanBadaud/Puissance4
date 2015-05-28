@@ -17,5 +17,7 @@ public class Case {
     public void affecterPion(Pion pion) {
         this.pion = pion;
         this.pion.proprietaire.pionsRestants -= 1;
+        this.pion.statutPion = "placé";
+        this.statutCase = "occupée";
     }
 }

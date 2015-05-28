@@ -7,14 +7,21 @@ public class Joueur {
 		public String nom;
 		public int score;
 		public int pionsRestants;
+		public String couleur;
 		public boolean actif;
+		public Pion pions[];
 
 		//Constructeur
-		public Joueur(String nom, int score, int pionsRestants, boolean actif) {
+		public Joueur(String nom, String couleur, int pions) {
 				this.nom = nom;
-				this.score = score;
-				this.pionsRestants = pionsRestants;
-				this.actif = actif;
+				this.couleur = couleur;
+				this.score = 0;
+				this.pionsRestants = pions;
+				this.actif = false;
+
+				for (int i = 0; i < pions; i++) {
+					this.pions[i] = new Pion(this);
+				}
 		}
 
 		//Getters
