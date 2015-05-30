@@ -29,8 +29,8 @@ public class MyActivity extends Activity {
         ButtonIA = (Button) findViewById(R.id.IAButton);
         ButtonSettings = (Button) findViewById(R.id.settings);
 
-				MediaPlayer mp = MediaPlayer.create(MyActivity.this, R.raw.hahaha);
-				mp.start();
+				MediaPlayer mediaPlayer = MediaPlayer.create(MyActivity.this, R.raw.hahaha);
+				mediaPlayer.start();
 
 				//mp.reset();
 				//mp.prepare();

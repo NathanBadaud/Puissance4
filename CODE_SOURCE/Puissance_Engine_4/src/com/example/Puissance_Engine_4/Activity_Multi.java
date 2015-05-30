@@ -21,6 +21,7 @@ public class Activity_Multi extends Activity {
     TextView nomJoueur1, nomJoueur2, score, scoreJoueur1, scoreJoueur2;
     ImageView imageJoueur1, imageJoueur2;
     Button ButtonRecommencerMulti;
+		MediaPlayer musique;
     private LinearLayout grille;
     public TextView vuePlateau[][];
     public Jeu jeuMulti;
@@ -47,7 +48,6 @@ public class Activity_Multi extends Activity {
         imageJoueur1 = (ImageView) findViewById(R.id.imageJoueur1);
         imageJoueur2 = (ImageView) findViewById(R.id.imageJoueur2);
 
-
         //Recommencer une partie
         ButtonRecommencerMulti = (Button) findViewById(R.id.recommencerMulti);
         ButtonRecommencerMulti.setOnClickListener(new View.OnClickListener() {
@@ -59,17 +59,17 @@ public class Activity_Multi extends Activity {
                 }
         });
 
-        vuePlateau = new TextView[hauteur][largeur];
+				vuePlateau = new TextView[hauteur][largeur];
         grille = (LinearLayout) findViewById(R.id.grille);
+
+				musique = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
+				musique.start();
 
         // initialisation de la partie modele
         jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur2.getText().toString());
         jeuMulti.demarrerPartie();
         changerImagesJoueurs();
         actualiserScores();
-
-				//MediaPlayer mp = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
-				//mp.start();
 
         for (int i = hauteur-1; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
@@ -102,8 +102,10 @@ public class Activity_Multi extends Activity {
                                                                 changerImagesJoueurs();
                                                             } else {
                                                                 //messagePopUp();
+																																musique = MediaPlayer.create(Activity_Multi.this, R.raw.whatwasthat);
+																																musique.start();
                                                                 Toast.makeText(getApplicationContext(),
-                                                                        jeuMulti.afficherVainqueur() + " a gagné la partie. Une nouvelle partie commencera dans " + String.valueOf(tempsEcoule), Toast.LENGTH_LONG)
+																																				jeuMulti.afficherVainqueur() + " a gagné la partie. Une nouvelle partie commencera dans " + String.valueOf(tempsEcoule), Toast.LENGTH_LONG)
                                                                         .show();
 
                                                             actualiserScores();
