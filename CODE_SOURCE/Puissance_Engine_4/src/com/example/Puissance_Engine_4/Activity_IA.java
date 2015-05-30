@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,8 +17,12 @@ import android.widget.TextView;
  */
 public class Activity_IA extends Activity {
     TextView nomJoueur1, nomJoueur2;
-    private LinearLayout grille;
-    public TextView vuePlateau[][];
+		Button ButtonRecommencerIA;
+		private LinearLayout grille;
+		public TextView vuePlateau[][];
+		public Jeu jeuMulti;
+		final int hauteur = 6;
+		final int largeur = 7;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,28 +34,57 @@ public class Activity_IA extends Activity {
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
 
-//        GridView gridview = (GridView) findViewById(R.id.gridview);
-//        gridview.setAdapter(new ImageAdapter(this));
+				//Recommencer une partie
+				ButtonRecommencerIA = (Button) findViewById(R.id.recommencerIA);
+				ButtonRecommencerIA.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+								jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
+								jeuMulti.demarrerPartie();
+						}
+				});
 
-        vuePlateau = new TextView[6][7];
-        grille = (LinearLayout) findViewById(R.id.grille);
+				vuePlateau = new TextView[hauteur][largeur];
+				grille = (LinearLayout) findViewById(R.id.grille);
 
-        for (int i = 5; i >= 0; i--) {
-            LinearLayout ligne = new LinearLayout(this);
-            ligne.setOrientation(LinearLayout.HORIZONTAL);
+				// initialisation de la partie modele
+				jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
+				jeuMulti.demarrerPartie();
 
-            for (int j = 0; j <= 6; j++) {
-                vuePlateau[i][j] = new TextView(this);
-                vuePlateau[i][j]
-                        .setLayoutParams(new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.WRAP_CONTENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-                vuePlateau[i][j]
-                        .setBackgroundResource(R.drawable.case_vide);
+				for (int i = hauteur-1; i >= 0; i--) {
+						LinearLayout ligne = new LinearLayout(this);
+						ligne.setOrientation(LinearLayout.HORIZONTAL);
+						final int ligneIndex = i;
+						for (int j = 0; j < largeur; j++) {
+								final int colonneIndex = j;
+								vuePlateau[i][j] = new TextView(this);
+								vuePlateau[i][j]
+												.setLayoutParams(new LinearLayout.LayoutParams(
+																ViewGroup.LayoutParams.WRAP_CONTENT,
+																ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+								vuePlateau[i][j]
+												.setBackgroundResource(R.drawable.case_vide);
 
-                ligne.addView(vuePlateau[i][j]);
-            }
-            grille.addView(ligne);
-        }
-    }
+								//Ajoute un clickListener sur le plateau de jeu
+								vuePlateau[i][j]
+												.setOnClickListener(new View.OnClickListener() {
+														@Override
+														public void onClick(View view) {
+																int caseDispo = jeuMulti.determinerCaseDisponible(colonneIndex);
+																if (caseDispo < hauteur) {
+																		if (jeuMulti.placerPion(colonneIndex, caseDispo) == "jaune") {
+																				vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionjaune);
+																		} else {
+																				vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
+																		}
+																		jeuMulti.joueurSuivant();
+																}
+														}
+												});
+
+								ligne.addView(vuePlateau[i][j]);
+						}
+						grille.addView(ligne);
+				}
+		}
 }

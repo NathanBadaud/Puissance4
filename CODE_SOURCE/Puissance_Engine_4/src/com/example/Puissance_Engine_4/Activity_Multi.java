@@ -1,10 +1,12 @@
 package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
  */
 public class Activity_Multi extends Activity {
     TextView nomJoueur1, nomJoueur2;
+		Button ButtonRecommencerMulti;
     private LinearLayout grille;
     public TextView vuePlateau[][];
     public Jeu jeuMulti;
@@ -28,6 +31,16 @@ public class Activity_Multi extends Activity {
 
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
+
+				//Recommencer une partie
+				ButtonRecommencerMulti = (Button) findViewById(R.id.recommencerMulti);
+				ButtonRecommencerMulti.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+								jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
+								jeuMulti.demarrerPartie();
+						}
+				});
 
         vuePlateau = new TextView[hauteur][largeur];
         grille = (LinearLayout) findViewById(R.id.grille);
