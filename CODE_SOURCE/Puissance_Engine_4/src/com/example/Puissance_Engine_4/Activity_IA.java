@@ -7,16 +7,14 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 /**
  * Created by matthieu on 06/05/2015.
  */
 public class Activity_IA extends Activity {
     TextView nomJoueur1, nomJoueur2;
+		ImageView imageJoueur1IA, imageJoueur2IA;
 		Button ButtonRecommencerIA;
 		private LinearLayout grille;
 		public TextView vuePlateau[][];
@@ -33,6 +31,9 @@ public class Activity_IA extends Activity {
 
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
+
+				imageJoueur1IA = (ImageView) findViewById(R.id.imageJoueur1IA);
+				imageJoueur2IA = (ImageView) findViewById(R.id.imageJoueur2IA);
 
 				//Recommencer une partie
 				ButtonRecommencerIA = (Button) findViewById(R.id.recommencerIA);
@@ -58,6 +59,7 @@ public class Activity_IA extends Activity {
 				// initialisation de la partie modele
 				jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
 				jeuMulti.demarrerPartie();
+				changerImagesJoueurs();
 
 				for (int i = hauteur-1; i >= 0; i--) {
 						LinearLayout ligne = new LinearLayout(this);
@@ -86,6 +88,7 @@ public class Activity_IA extends Activity {
 																				vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
 																		}
 																		jeuMulti.joueurSuivant();
+																		changerImagesJoueurs();
 																}
 														}
 												});
@@ -93,6 +96,16 @@ public class Activity_IA extends Activity {
 								ligne.addView(vuePlateau[i][j]);
 						}
 						grille.addView(ligne);
+				}
+		}
+
+		public void changerImagesJoueurs() {
+				if (jeuMulti.joueurs[0].actif == true) {
+						imageJoueur1IA.setImageResource(R.drawable.player1on);
+						imageJoueur2IA.setImageResource((R.drawable.player2));
+				} else {
+						imageJoueur1IA.setImageResource(R.drawable.player1);
+						imageJoueur2IA.setImageResource((R.drawable.player2on));
 				}
 		}
 }
