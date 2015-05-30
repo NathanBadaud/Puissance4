@@ -13,7 +13,8 @@ import android.widget.*;
  */
 public class Activity_Multi extends Activity {
     TextView nomJoueur1, nomJoueur2, score, scoreJoueur1, scoreJoueur2;
-		Button ButtonRecommencerMulti;
+    ImageView imageJoueur1, imageJoueur2;
+    Button ButtonRecommencerMulti;
     private LinearLayout grille;
     public TextView vuePlateau[][];
     public Jeu jeuMulti;
@@ -29,28 +30,31 @@ public class Activity_Multi extends Activity {
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
 
-				score = (TextView) findViewById(R.id.score);
-				scoreJoueur1 = (TextView) findViewById(R.id.scoreJoueur1);
-				scoreJoueur2 = (TextView) findViewById(R.id.scoreJoueur2);
+        score = (TextView) findViewById(R.id.score);
+        scoreJoueur1 = (TextView) findViewById(R.id.scoreJoueur1);
+        scoreJoueur2 = (TextView) findViewById(R.id.scoreJoueur2);
+
+        imageJoueur1 = (ImageView) findViewById(R.id.imageJoueur1);
+        imageJoueur2 = (ImageView) findViewById(R.id.imageJoueur2);
 
 
-				//Recommencer une partie
-				ButtonRecommencerMulti = (Button) findViewById(R.id.recommencerMulti);
-				ButtonRecommencerMulti.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-								jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
-								jeuMulti.demarrerPartie();
+        //Recommencer une partie
+        ButtonRecommencerMulti = (Button) findViewById(R.id.recommencerMulti);
+        ButtonRecommencerMulti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+            jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
+            jeuMulti.demarrerPartie();
 
-								for (int i = hauteur-1; i >= 0; i--) {
-										for (int j = 0; j < largeur; j++) {
-												final int colonneIndex = j;
-												vuePlateau[i][j]
-																.setBackgroundResource(R.drawable.case_vide);
-										}
-								}
-						}
-				});
+            for (int i = hauteur-1; i >= 0; i--) {
+                    for (int j = 0; j < largeur; j++) {
+                            final int colonneIndex = j;
+                            vuePlateau[i][j]
+                                            .setBackgroundResource(R.drawable.case_vide);
+                    }
+            }
+                }
+        });
 
         vuePlateau = new TextView[hauteur][largeur];
         grille = (LinearLayout) findViewById(R.id.grille);
@@ -58,9 +62,10 @@ public class Activity_Multi extends Activity {
         // initialisation de la partie modele
         jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
         jeuMulti.demarrerPartie();
+        changerImagesJoueurs();
 
-				scoreJoueur1.setText(Integer.toString(jeuMulti.joueurs[0].score));
-				scoreJoueur2.setText(Integer.toString(jeuMulti.joueurs[1].score));
+        scoreJoueur1.setText(Integer.toString(jeuMulti.joueurs[0].score));
+        scoreJoueur2.setText(Integer.toString(jeuMulti.joueurs[1].score));
 
         for (int i = hauteur-1; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
@@ -89,7 +94,8 @@ public class Activity_Multi extends Activity {
                                                                     vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
                                                                 }
                                                                 if (jeuMulti.determinerVictoire() == 0) {
-																																		jeuMulti.joueurSuivant();
+                                                                    jeuMulti.joueurSuivant();
+                                                                    changerImagesJoueurs();
                                                                 } else {
                                                                     Toast.makeText(getApplicationContext(),
                                                                             "Quelqu'un a gagné", Toast.LENGTH_LONG)
@@ -104,16 +110,18 @@ public class Activity_Multi extends Activity {
             grille.addView(ligne);
         }
     }
+
+    public void changerImagesJoueurs() {
+        if (jeuMulti.joueurs[0].actif == true) {
+            imageJoueur1.setImageResource(R.drawable.player1on);
+            imageJoueur2.setImageResource((R.drawable.player2));
+        } else {
+            imageJoueur1.setImageResource(R.drawable.player1);
+            imageJoueur2.setImageResource((R.drawable.player2on));
+        }
+    }
 }
 
 
-/*ImageView imageJoueur1 = (ImageView) findViewById(R.id.imageJoueur1);
-ImageView imageJoueur2 = (ImageView) findViewById(R.id.imageJoueur2);
 
-if (jeuMulti.joueurs[0].actif = true) {
-				imageJoueur1.setImageResource(R.drawable.player1on);
-				imageJoueur2.setImageResource((R.drawable.player2));
-		} else {
-				imageJoueur1.setImageResource(R.drawable.player1);
-				imageJoueur2.setImageResource((R.drawable.player2on));
-}*/
+
