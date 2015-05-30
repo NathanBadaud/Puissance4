@@ -18,7 +18,7 @@ public class Jeu {
 				joueurs = new Joueur[2];
 				joueurs[0] = new Joueur(nomJoueur1, "jaune", hauteur*largeur/2);
 				joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
-				this.joueurUnCommence = ((int)(Math.random())) != 0;
+				this.joueurUnCommence = True;
 		}
 
 		public void nouvellePartie() {
