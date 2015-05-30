@@ -10,5 +10,5 @@ public class IA extends Joueur {
         this.estHumain = false;
     }
 
-    //méthodes spécifiques à l'IA à développer : déterminer un pion à placer...
+    //methodes spécifiques à l'IA a developper : determiner un pion à placer...
 }

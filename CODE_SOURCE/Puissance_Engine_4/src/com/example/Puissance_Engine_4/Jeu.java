@@ -22,7 +22,7 @@ public class Jeu {
 		}
 
 		public void nouvellePartie() {
-				//réinitialisation du nombre de pions des joueurs
+				//reinitialisation du nombre de pions des joueurs
 				joueurs[0].pionsRestants = plateau.hauteur*plateau.largeur/2;
 				joueurs[1].pionsRestants = plateau.hauteur*plateau.largeur/2;
 
@@ -40,12 +40,16 @@ public class Jeu {
 			joueurs[1].actif = !joueurUnCommence;
 		}
 
-		public boolean placementPossible(int coordonneeX, int coordonneeY) {
-			return plateau.colonnes[coordonneeX].colonneDisponible(plateau.hauteur);
+		public int determinerCaseDisponible(int colonne) {
+			return plateau.colonnes[colonne].premiereCaseLibre;
 		}
 
 		public String placerPion(int coordonneeX, int coordonneeY){
 			plateau.colonnes[coordonneeX].cases[coordonneeY].affecterPion(joueurActif());
+			plateau.colonnes[coordonneeX].premiereCaseLibre += 1;
+
+			this.dernierPionX = coordonneeX;
+			this.dernierPionY = coordonneeY;
 			return joueurActif().couleur;
 		}
 
@@ -57,7 +61,7 @@ public class Jeu {
 		}
 
 		public void joueurSuivant() {
-			// au départ, les 2 joueurs sont inactifs, joueur 1 devient actif
+			// au depart, les 2 joueurs sont inactifs, joueur 1 devient actif
 			if (joueurs[0].actif == joueurs[1].actif) {
 				joueurs[0].actif = !joueurs[0].actif;
 			} else {
