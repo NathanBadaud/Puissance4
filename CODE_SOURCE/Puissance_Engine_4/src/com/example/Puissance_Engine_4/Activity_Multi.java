@@ -62,6 +62,7 @@ public class Activity_Multi extends Activity {
                                                                 } else {
                                                                     vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
                                                                 }
+                                                                jeuMulti.joueurSuivant();
                                                             }
 														}
 												});
