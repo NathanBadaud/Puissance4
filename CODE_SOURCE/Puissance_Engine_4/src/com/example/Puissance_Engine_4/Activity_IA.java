@@ -13,7 +13,7 @@ import android.widget.*;
  * Created by matthieu on 06/05/2015.
  */
 public class Activity_IA extends Activity {
-    TextView nomJoueur1, nomJoueur2;
+    TextView nomJoueur1, nomJoueur2, score, scoreJoueur1, scoreJoueur2;
 		ImageView imageJoueur1IA, imageJoueur2IA;
 		Button ButtonRecommencerIA;
 		private LinearLayout grille;
@@ -25,7 +25,6 @@ public class Activity_IA extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Supression du titre de l'application
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.ia_game_display);
 
@@ -35,7 +34,10 @@ public class Activity_IA extends Activity {
 				imageJoueur1IA = (ImageView) findViewById(R.id.imageJoueur1IA);
 				imageJoueur2IA = (ImageView) findViewById(R.id.imageJoueur2IA);
 
-				//Recommencer une partie
+				score = (TextView) findViewById(R.id.scoreIA);
+				scoreJoueur1 = (TextView) findViewById(R.id.scoreJoueur1IA);
+				scoreJoueur2 = (TextView) findViewById(R.id.scoreJoueur2IA);
+
 				ButtonRecommencerIA = (Button) findViewById(R.id.recommencerIA);
 				ButtonRecommencerIA.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -56,10 +58,12 @@ public class Activity_IA extends Activity {
 				vuePlateau = new TextView[hauteur][largeur];
 				grille = (LinearLayout) findViewById(R.id.grille);
 
-				// initialisation de la partie modele
 				jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
 				jeuMulti.demarrerPartie();
 				changerImagesJoueurs();
+
+				scoreJoueur1.setText(Integer.toString(jeuMulti.joueurs[0].score));
+				scoreJoueur2.setText(Integer.toString(jeuMulti.joueurs[1].score));
 
 				for (int i = hauteur-1; i >= 0; i--) {
 						LinearLayout ligne = new LinearLayout(this);
@@ -75,7 +79,6 @@ public class Activity_IA extends Activity {
 								vuePlateau[i][j]
 												.setBackgroundResource(R.drawable.case_vide);
 
-								//Ajoute un clickListener sur le plateau de jeu
 								vuePlateau[i][j]
 												.setOnClickListener(new View.OnClickListener() {
 														@Override
@@ -92,7 +95,6 @@ public class Activity_IA extends Activity {
 																}
 														}
 												});
-
 								ligne.addView(vuePlateau[i][j]);
 						}
 						grille.addView(ligne);
