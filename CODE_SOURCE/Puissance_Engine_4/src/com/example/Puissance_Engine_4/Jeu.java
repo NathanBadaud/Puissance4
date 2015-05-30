@@ -75,7 +75,114 @@ public class Jeu {
 
 		}
 
-		public static int determinerVictoire() {
+		public int determinerVictoire() {
+			// victoire verticale
+			if (dernierPionY > 3) {
+				if (caseMemeProprietaire(dernierPionX, dernierPionY - 1)
+					+caseMemeProprietaire(dernierPionX, dernierPionY - 2)
+					+caseMemeProprietaire(dernierPionX, dernierPionY - 3)
+					== 3)
+					return 1;
+
+			}
+
+			// victoires horizontales
+			if (dernierPionX > 0 && dernierPionX < plateau.largeur - 2) {
+				if (caseMemeProprietaire(dernierPionX - 1, dernierPionY)
+					+caseMemeProprietaire(dernierPionX + 1, dernierPionY)
+					+caseMemeProprietaire(dernierPionX + 2, dernierPionY)
+					== 3)
+					return 2;
+			}
+			if (dernierPionX > 1 && dernierPionX < plateau.largeur - 1) {
+				if (caseMemeProprietaire(dernierPionX - 2, dernierPionY)
+					+caseMemeProprietaire(dernierPionX - 1, dernierPionY)
+					+caseMemeProprietaire(dernierPionX + 1, dernierPionY)
+					== 3)
+					return 3;
+			}
+			if (dernierPionX < plateau.largeur - 3) {
+				if (caseMemeProprietaire(dernierPionX + 1, dernierPionY)
+					+caseMemeProprietaire(dernierPionX + 2, dernierPionY)
+					+caseMemeProprietaire(dernierPionX + 3, dernierPionY)
+					== 3)
+					return 4;
+			}
+			if (dernierPionX > 2) {
+				if (caseMemeProprietaire(dernierPionX - 1, dernierPionY)
+					+caseMemeProprietaire(dernierPionX - 2, dernierPionY)
+					+caseMemeProprietaire(dernierPionX - 3, dernierPionY)
+					== 3)
+					return 5;
+			}
+
+			// victoires diagonale bas-gauche, haut-droit
+			if (dernierPionX > 0 && dernierPionX < plateau.largeur - 2 && dernierPionY > 0 && dernierPionY < plateau.hauteur - 2) {
+				if (caseMemeProprietaire(dernierPionX - 1, dernierPionY - 1)
+					+caseMemeProprietaire(dernierPionX + 1, dernierPionY + 1)
+					+caseMemeProprietaire(dernierPionX + 2, dernierPionY + 2)
+					== 3)
+					return 6;
+			}
+			if (dernierPionX > 1 && dernierPionX < plateau.largeur - 1 && dernierPionY > 1 && dernierPionY < plateau.hauteur - 1) {
+				if (caseMemeProprietaire(dernierPionX - 2, dernierPionY - 2)
+					+caseMemeProprietaire(dernierPionX - 1, dernierPionY - 1)
+					+caseMemeProprietaire(dernierPionX + 1, dernierPionY + 1)
+					== 3)
+					return 7;
+			}
+			if (dernierPionX < plateau.largeur - 3 && dernierPionY < plateau.hauteur - 3) {
+				if (caseMemeProprietaire(dernierPionX + 1, dernierPionY + 1)
+					+caseMemeProprietaire(dernierPionX + 2, dernierPionY + 2)
+					+caseMemeProprietaire(dernierPionX + 3, dernierPionY + 3)
+					== 3)
+					return 8;
+			}
+			if (dernierPionX > 2 && dernierPionY > 2) {
+				if (caseMemeProprietaire(dernierPionX - 1, dernierPionY - 1)
+					+caseMemeProprietaire(dernierPionX - 2, dernierPionY - 2)
+					+caseMemeProprietaire(dernierPionX - 3, dernierPionY - 3)
+					== 3)
+					return 9;
+			}
+
+			// victoires diagonale haut-gauche, bas-droit
+			if (dernierPionX > 0 && dernierPionX < plateau.largeur - 2 && dernierPionY > 2 && dernierPionY < plateau.hauteur - 1) {
+				if (caseMemeProprietaire(dernierPionX - 1, dernierPionY + 1)
+					+caseMemeProprietaire(dernierPionX + 1, dernierPionY - 1)
+					+caseMemeProprietaire(dernierPionX + 2, dernierPionY - 2)
+					== 3)
+					return 10;
+			}
+			if (dernierPionX > 1 && dernierPionX < plateau.largeur - 1 && dernierPionY > 1 && dernierPionY < plateau.hauteur - 2) {
+				if (caseMemeProprietaire(dernierPionX - 2, dernierPionY + 2)
+					+caseMemeProprietaire(dernierPionX - 1, dernierPionY + 1)
+					+caseMemeProprietaire(dernierPionX + 1, dernierPionY - 1)
+					== 3)
+					return 1;
+			}
+			if (dernierPionX > 2 && dernierPionY < plateau.hauteur - 3) {
+				if (caseMemeProprietaire(dernierPionX - 3, dernierPionY + 3)
+					+caseMemeProprietaire(dernierPionX - 2, dernierPionY + 2)
+					+caseMemeProprietaire(dernierPionX - 1, dernierPionY + 1)
+					== 3)
+					return 1;
+			}
+			if (dernierPionX < plateau.largeur - 3 && dernierPionY > 2) {
+				if (caseMemeProprietaire(dernierPionX + 1, dernierPionY - 1)
+					+caseMemeProprietaire(dernierPionX + 2, dernierPionY - 2)
+					+caseMemeProprietaire(dernierPionX + 3, dernierPionY - 3)
+					== 3)
+					return 1;
+			}
+
+			return 0;
+		}
+
+		public int caseMemeProprietaire(int positionX, int positionY) {
+			if (plateau.colonnes[dernierPionX].cases[dernierPionY].proprietaire ==  plateau.colonnes[positionX].cases[positionY].proprietaire)
+				return 1;
+			else
 				return 0;
 		}
 
