@@ -15,7 +15,7 @@ import android.widget.TextView;
  * Created by matthieu on 06/05/2015.
  */
 public class Activity_Multi extends Activity {
-    TextView nomJoueur1, nomJoueur2;
+    TextView nomJoueur1, nomJoueur2, score, scoreJoueur1, scoreJoueur2;
 		Button ButtonRecommencerMulti;
     private LinearLayout grille;
     public TextView vuePlateau[][];
@@ -31,6 +31,11 @@ public class Activity_Multi extends Activity {
 
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
+
+				score = (TextView) findViewById(R.id.score);
+				scoreJoueur1 = (TextView) findViewById(R.id.scoreJoueur1);
+				scoreJoueur2 = (TextView) findViewById(R.id.scoreJoueur2);
+
 
 				//Recommencer une partie
 				ButtonRecommencerMulti = (Button) findViewById(R.id.recommencerMulti);
@@ -56,6 +61,9 @@ public class Activity_Multi extends Activity {
         // initialisation de la partie modele
         jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
         jeuMulti.demarrerPartie();
+
+				scoreJoueur1.setText(Integer.toString(jeuMulti.joueurs[0].score));
+				scoreJoueur2.setText(Integer.toString(jeuMulti.joueurs[1].score));
 
         for (int i = hauteur-1; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
