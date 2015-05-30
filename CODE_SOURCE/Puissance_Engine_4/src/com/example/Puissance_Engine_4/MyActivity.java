@@ -2,6 +2,7 @@ package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -23,11 +24,16 @@ public class MyActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main);
 
-
         ButtonTitle = (Button) findViewById(R.id.Title);
         ButtonMulti = (Button) findViewById(R.id.MultiButton);
         ButtonIA = (Button) findViewById(R.id.IAButton);
         ButtonSettings = (Button) findViewById(R.id.settings);
+
+				MediaPlayer mp = MediaPlayer.create(MyActivity.this, R.raw.hahaha);
+				mp.start();
+
+				//mp.reset();
+				//mp.prepare();
 
 				//Démarrage des SETTINGS
         ButtonSettings.setOnClickListener(new View.OnClickListener() {

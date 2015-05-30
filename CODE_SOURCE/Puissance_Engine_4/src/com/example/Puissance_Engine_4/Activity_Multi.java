@@ -2,6 +2,7 @@ package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -66,6 +67,9 @@ public class Activity_Multi extends Activity {
         jeuMulti.demarrerPartie();
         changerImagesJoueurs();
         actualiserScores();
+
+				//MediaPlayer mp = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
+				//mp.start();
 
         for (int i = hauteur-1; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
