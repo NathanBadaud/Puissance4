@@ -77,7 +77,7 @@ public class Jeu {
 
 		public int determinerVictoire() {
 			// victoire verticale
-			if (dernierPionY > 3) {
+			if (dernierPionY > 2) {
 				if (caseMemeProprietaire(dernierPionX, dernierPionY - 1)
 					+caseMemeProprietaire(dernierPionX, dernierPionY - 2)
 					+caseMemeProprietaire(dernierPionX, dernierPionY - 3)

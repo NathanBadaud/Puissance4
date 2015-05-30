@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 /**
  * Created by matthieu on 06/05/2015.
@@ -94,7 +91,9 @@ public class Activity_Multi extends Activity {
                                                                 if (jeuMulti.determinerVictoire() == 0) {
                                                                     jeuMulti.joueurSuivant();
                                                                 } else {
-                                                                    int a = jeuMulti.determinerVictoire();
+                                                                    Toast.makeText(getApplicationContext(),
+                                                                            "Quelqu'un a gagné", Toast.LENGTH_LONG)
+                                                                            .show();
                                                                 }
                                                             }
 														}
