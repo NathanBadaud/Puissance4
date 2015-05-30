@@ -79,6 +79,7 @@ public class Activity_IA extends Activity {
 								vuePlateau[i][j]
 												.setBackgroundResource(R.drawable.case_vide);
 
+								//Ajoute un clickListener sur le plateau de jeu
 								vuePlateau[i][j]
 												.setOnClickListener(new View.OnClickListener() {
 														@Override
@@ -90,11 +91,18 @@ public class Activity_IA extends Activity {
 																		} else {
 																				vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
 																		}
-																		jeuMulti.joueurSuivant();
-																		changerImagesJoueurs();
+																		if (jeuMulti.determinerVictoire() == 0) {
+																				jeuMulti.joueurSuivant();
+																				changerImagesJoueurs();
+																		} else {
+																				Toast.makeText(getApplicationContext(),
+																								"Quelqu'un a gagné", Toast.LENGTH_LONG)
+																								.show();
+																		}
 																}
 														}
 												});
+
 								ligne.addView(vuePlateau[i][j]);
 						}
 						grille.addView(ligne);
