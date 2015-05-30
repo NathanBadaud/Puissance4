@@ -31,6 +31,7 @@ public class Jeu {
 				this.joueurUnCommence = !this.joueurUnCommence;
 
 				for (int i = 0; i < plateau.largeur; i++) {
+						plateau.colonnes[i].premiereCaseLibre = 0;
 						for (int j = 0; j < plateau.hauteur; j++) {
 								plateau.colonnes[i].cases[j].reinitialiserCase();
 						}
@@ -75,6 +76,19 @@ public class Jeu {
 
 		public void affichageGraphique() {
 
+		}
+
+		public int caseMemeProprietaire(int positionX, int positionY) {
+			if (plateau.colonnes[dernierPionX].cases[dernierPionY].proprietaire ==  plateau.colonnes[positionX].cases[positionY].proprietaire)
+				return 1;
+			else
+				return 0;
+		}
+
+		public String afficherVainqueur() {
+			Joueur vainqueur = plateau.colonnes[dernierPionX].cases[dernierPionY].proprietaire;
+			vainqueur.score += 1;
+			return vainqueur.nom;
 		}
 
 		public int determinerVictoire() {
@@ -181,16 +195,7 @@ public class Jeu {
 			return 0;
 		}
 
-		public int caseMemeProprietaire(int positionX, int positionY) {
-			if (plateau.colonnes[dernierPionX].cases[dernierPionY].proprietaire ==  plateau.colonnes[positionX].cases[positionY].proprietaire)
-				return 1;
-			else
-				return 0;
-		}
 
-		public void afficherVainqueur() {
-
-		}
 
 				/*		Getters
 		public int getTour() {
