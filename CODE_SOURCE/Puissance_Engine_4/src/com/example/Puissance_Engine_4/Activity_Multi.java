@@ -32,8 +32,9 @@ public class Activity_Multi extends Activity {
         for (int i = 5; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
             ligne.setOrientation(LinearLayout.HORIZONTAL);
-
+            final int colonneIndex = i;
             for (int j = 0; j <= 6; j++) {
+                final int ligneIndex = j;
                 vuePlateau[i][j] = new TextView(this);
                 vuePlateau[i][j]
                         .setLayoutParams(new LinearLayout.LayoutParams(
@@ -47,7 +48,7 @@ public class Activity_Multi extends Activity {
 												.setOnClickListener(new View.OnClickListener() {
 														@Override
 														public void onClick(View view) {
-
+                                                            vuePlateau[colonneIndex][ligneIndex].setBackgroundResource(R.drawable.pionjaune);
 														}
 												});
 
