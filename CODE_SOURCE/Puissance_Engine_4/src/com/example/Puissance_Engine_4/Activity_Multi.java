@@ -39,6 +39,14 @@ public class Activity_Multi extends Activity {
 						public void onClick(View v) {
 								jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
 								jeuMulti.demarrerPartie();
+
+								for (int i = hauteur-1; i >= 0; i--) {
+										for (int j = 0; j < largeur; j++) {
+												final int colonneIndex = j;
+												vuePlateau[i][j]
+																.setBackgroundResource(R.drawable.case_vide);
+										}
+								}
 						}
 				});
 
