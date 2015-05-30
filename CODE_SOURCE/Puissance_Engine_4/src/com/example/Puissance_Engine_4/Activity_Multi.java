@@ -81,7 +81,7 @@ public class Activity_Multi extends Activity {
 												.setOnClickListener(new View.OnClickListener() {
 														@Override
 														public void onClick(View view) {
-                                                            int caseDispo = jeuMulti.determinerCaseDisponible(colonneIndex);
+																                            int caseDispo = jeuMulti.determinerCaseDisponible(colonneIndex);
                                                             if (caseDispo < hauteur){
                                                                 if (jeuMulti.placerPion(colonneIndex, caseDispo) == "jaune") {
                                                                     vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionjaune);
@@ -89,7 +89,7 @@ public class Activity_Multi extends Activity {
                                                                     vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
                                                                 }
                                                                 if (jeuMulti.determinerVictoire() == 0) {
-                                                                    jeuMulti.joueurSuivant();
+																																		jeuMulti.joueurSuivant();
                                                                 } else {
                                                                     Toast.makeText(getApplicationContext(),
                                                                             "Quelqu'un a gagné", Toast.LENGTH_LONG)
@@ -105,3 +105,15 @@ public class Activity_Multi extends Activity {
         }
     }
 }
+
+
+/*ImageView imageJoueur1 = (ImageView) findViewById(R.id.imageJoueur1);
+ImageView imageJoueur2 = (ImageView) findViewById(R.id.imageJoueur2);
+
+if (jeuMulti.joueurs[0].actif = true) {
+				imageJoueur1.setImageResource(R.drawable.player1on);
+				imageJoueur2.setImageResource((R.drawable.player2));
+		} else {
+				imageJoueur1.setImageResource(R.drawable.player1);
+				imageJoueur2.setImageResource((R.drawable.player2on));
+}*/

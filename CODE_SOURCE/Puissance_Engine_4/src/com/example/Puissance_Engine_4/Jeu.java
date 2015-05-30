@@ -1,5 +1,7 @@
 package com.example.Puissance_Engine_4;
 
+import android.widget.ImageView;
+
 /**
  * Created by Nathan on 27/05/2015.
  */
