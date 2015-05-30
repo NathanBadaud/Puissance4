@@ -16,6 +16,9 @@ public class Activity_Multi extends Activity {
     TextView nomJoueur1, nomJoueur2;
     private LinearLayout grille;
     public TextView vuePlateau[][];
+    public Jeu jeuMulti;
+    final int hauteur = 6;
+    final int largeur = 7;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,14 +29,17 @@ public class Activity_Multi extends Activity {
         nomJoueur1 = (TextView) findViewById(R.id.nomJoueur1);
         nomJoueur2 = (TextView) findViewById(R.id.nomJoueur2);
 
-        vuePlateau = new TextView[6][7];
+        vuePlateau = new TextView[hauteur][largeur];
         grille = (LinearLayout) findViewById(R.id.grille);
 
-        for (int i = 5; i >= 0; i--) {
+        // initialisation de la partie modèle
+        jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
+
+        for (int i = hauteur-1; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
             ligne.setOrientation(LinearLayout.HORIZONTAL);
             final int colonneIndex = i;
-            for (int j = 0; j <= 6; j++) {
+            for (int j = 0; j < largeur; j++) {
                 final int ligneIndex = j;
                 vuePlateau[i][j] = new TextView(this);
                 vuePlateau[i][j]
@@ -48,7 +54,13 @@ public class Activity_Multi extends Activity {
 												.setOnClickListener(new View.OnClickListener() {
 														@Override
 														public void onClick(View view) {
-                                                            vuePlateau[colonneIndex][ligneIndex].setBackgroundResource(R.drawable.pionjaune);
+                                                            if (jeuMulti.placementPossible(colonneIndex, ligneIndex)){
+                                                                if (jeuMulti.placerPion(colonneIndex, ligneIndex) == "jaune") {
+                                                                    vuePlateau[colonneIndex][ligneIndex].setBackgroundResource(R.drawable.pionjaune);
+                                                                } else {
+                                                                    vuePlateau[colonneIndex][ligneIndex].setBackgroundResource(R.drawable.pionrouge);
+                                                                }
+                                                            }
 														}
 												});
 

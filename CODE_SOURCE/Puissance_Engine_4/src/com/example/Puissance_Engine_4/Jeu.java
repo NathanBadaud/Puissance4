@@ -5,34 +5,66 @@ package com.example.Puissance_Engine_4;
  */
 public class Jeu {
 		public int tour;
+		public boolean joueurUnCommence;
 		public int dernierPionX;
 		public int dernierPionY;
 		public Plateau plateau;
-		public Joueur joueurs[];
+		public Joueur[] joueurs;
 
 		//Constructeur
-		public Jeu(int tour, int dernierPionX, int dernierPionY) {
-				this.tour = tour;
-				this.dernierPionX = dernierPionX;
-				this.dernierPionY = dernierPionY;
-		}
-
-		public void initialiser(int hauteur, int largeur, String nomJoueur1, String nomJoueur2) {
+		public Jeu(int hauteur, int largeur, String nomJoueur1, String nomJoueur2) {
+				this.tour = 1;
 				this.plateau = new Plateau(hauteur, largeur);
+				joueurs = new Joueur[2];
 				joueurs[0] = new Joueur(nomJoueur1, "jaune", hauteur*largeur/2);
 				joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
+				this.joueurUnCommence = ((int)(Math.random())) != 0;
 		}
 
-		public void nouvellePartie(int hauteur, int largeur) {
+		public void nouvellePartie() {
 				//réinitialisation du nombre de pions des joueurs
-				joueurs[0].pionsRestants = hauteur*largeur/2;
-				joueurs[1].pionsRestants = hauteur*largeur/2;
+				joueurs[0].pionsRestants = plateau.hauteur*plateau.largeur/2;
+				joueurs[1].pionsRestants = plateau.hauteur*plateau.largeur/2;
+
+				this.joueurUnCommence = !this.joueurUnCommence;
 
 				for (int i = 0; i < plateau.largeur; i++) {
 						for (int j = 0; j < plateau.hauteur; j++) {
 								plateau.colonnes[i].cases[j].reinitialiserCase();
 						}
 				}
+		}
+
+		public void demarrerPartie() {
+			joueurs[0].actif = joueurUnCommence;
+			joueurs[1].actif = !joueurUnCommence;
+		}
+
+		public boolean placementPossible(int coordonneeX, int coordonneeY) {
+			return plateau.colonnes[coordonneeX].colonneDisponible(plateau.hauteur);
+		}
+
+		public String placerPion(int coordonneeX, int coordonneeY){
+			plateau.colonnes[coordonneeX].cases[coordonneeY].affecterPion(joueurActif());
+			return joueurActif().couleur;
+		}
+
+		public Joueur joueurActif() {
+			if (joueurs[0].actif)
+				return joueurs[0];
+			else
+				return joueurs[1];
+		}
+
+		public void joueurSuivant() {
+			// au départ, les 2 joueurs sont inactifs, joueur 1 devient actif
+			if (joueurs[0].actif == joueurs[1].actif) {
+				joueurs[0].actif = !joueurs[0].actif;
+			} else {
+				//on change de joueur actif
+				joueurs[0].actif = !joueurs[0].actif;
+				joueurs[1].actif = !joueurs[1].actif;
+			}
 		}
 
 		public void affichageGraphique() {

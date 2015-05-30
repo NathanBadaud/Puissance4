@@ -9,6 +9,7 @@ public class Joueur {
 		public int pionsRestants;
 		public String couleur;
 		public boolean actif;
+		public boolean estHumain;
 
 		//Constructeur
 		public Joueur(String nom, String couleur, int pions) {
@@ -17,6 +18,7 @@ public class Joueur {
 				this.score = 0;
 				this.pionsRestants = pions;
 				this.actif = false;
+				this.estHumain = true;
 		}
 
 		public void afficherNom() {
