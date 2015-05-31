@@ -10,7 +10,6 @@ public class Jeu {
 		public int dernierPionY;
 		public Plateau plateau;
 		public Joueur[] joueurs;
-		public IA bot;
 
 		//Constructeur
 		public Jeu(int hauteur, int largeur, String nomJoueur1, String nomJoueur2) {
@@ -24,24 +23,21 @@ public class Jeu {
 		}
 
 		public Jeu(int hauteur, int largeur, String nomJoueur) {
-			this.tour = 1;
-			this.plateau = new Plateau(hauteur, largeur);
-			joueurs = new Joueur[1];
+			tour = 1;
+			plateau = new Plateau(hauteur, largeur);
+			joueurs = new Joueur[2];
 			joueurs[0] = new Joueur(nomJoueur, "jaune", hauteur*largeur/2);
+			joueurs[1] = new IA("Ordinateur", "rouge", hauteur*largeur/2);
 			joueurUnCommence = true;
-			bot = new IA("Ordinateur", "rouge", hauteur*largeur/2);
 			jeuSolo = true;
 		}
 
 		public void nouvellePartie() {
 				//reinitialisation du nombre de pions des joueurs
 				joueurs[0].pionsRestants = plateau.hauteur*plateau.largeur/2;
-				if (jeuSolo)
-					bot.pionsRestants = plateau.hauteur*plateau.largeur/2;
-				else
-					joueurs[1].pionsRestants = plateau.hauteur*plateau.largeur/2;
+				joueurs[1].pionsRestants = plateau.hauteur*plateau.largeur/2;
 
-				this.joueurUnCommence = !this.joueurUnCommence;
+				joueurUnCommence = !joueurUnCommence;
 
 				for (int i = 0; i < plateau.largeur; i++) {
 						plateau.colonnes[i].premiereCaseLibre = 0;
@@ -53,10 +49,7 @@ public class Jeu {
 
 		public void demarrerPartie() {
 			joueurs[0].actif = joueurUnCommence;
-			if (jeuSolo)
-				bot.actif = !joueurUnCommence;
-			else
-				joueurs[1].actif = !joueurUnCommence;
+			joueurs[1].actif = !joueurUnCommence;
 		}
 
 		public int determinerCaseDisponible(int colonne) {

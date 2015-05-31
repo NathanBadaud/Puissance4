@@ -11,4 +11,5 @@ public class IA extends Joueur {
     }
 
     //methodes spécifiques à l'IA a developper : determiner un pion à placer...
+    public void
 }
