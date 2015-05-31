@@ -1,32 +1,45 @@
 package com.example.Puissance_Engine_4;
 
-import android.widget.ImageView;
-
 /**
  * Created by Nathan on 27/05/2015.
  */
 public class Jeu {
 		public int tour;
-		public boolean joueurUnCommence;
+		public boolean joueurUnCommence, jeuSolo;
 		public int dernierPionX;
 		public int dernierPionY;
 		public Plateau plateau;
 		public Joueur[] joueurs;
+		public IA bot;
 
 		//Constructeur
 		public Jeu(int hauteur, int largeur, String nomJoueur1, String nomJoueur2) {
-				this.tour = 1;
-				this.plateau = new Plateau(hauteur, largeur);
-				joueurs = new Joueur[2];
-				joueurs[0] = new Joueur(nomJoueur1, "jaune", hauteur*largeur/2);
-				joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
-				this.joueurUnCommence = true;
+			tour = 1;
+			plateau = new Plateau(hauteur, largeur);
+			joueurs = new Joueur[2];
+			joueurs[0] = new Joueur(nomJoueur1, "jaune", hauteur*largeur/2);
+			joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
+			joueurUnCommence = true;
+			jeuSolo = false;
+		}
+
+		public Jeu(int hauteur, int largeur, String nomJoueur) {
+			this.tour = 1;
+			this.plateau = new Plateau(hauteur, largeur);
+			joueurs = new Joueur[1];
+			joueurs[0] = new Joueur(nomJoueur, "jaune", hauteur*largeur/2);
+			joueurUnCommence = true;
+			bot = new IA("Ordinateur", "rouge", hauteur*largeur/2);
+			jeuSolo = true;
 		}
 
 		public void nouvellePartie() {
 				//reinitialisation du nombre de pions des joueurs
 				joueurs[0].pionsRestants = plateau.hauteur*plateau.largeur/2;
-				joueurs[1].pionsRestants = plateau.hauteur*plateau.largeur/2;
+				if (jeuSolo)
+					bot.pionsRestants = plateau.hauteur*plateau.largeur/2;
+				else
+					joueurs[1].pionsRestants = plateau.hauteur*plateau.largeur/2;
 
 				this.joueurUnCommence = !this.joueurUnCommence;
 
