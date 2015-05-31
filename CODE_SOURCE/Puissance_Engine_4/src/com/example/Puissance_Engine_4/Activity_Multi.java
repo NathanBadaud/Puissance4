@@ -1,18 +1,12 @@
 package com.example.Puissance_Engine_4;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.*;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by matthieu on 06/05/2015.
@@ -20,17 +14,14 @@ import java.util.TimerTask;
 public class Activity_Multi extends Activity {
     TextView nomJoueur1, nomJoueur2, score, scoreJoueur1, scoreJoueur2;
     ImageView imageJoueur1, imageJoueur2;
-    Button ButtonRecommencerMulti;
-		MediaPlayer musique;
+    Button BoutonRecommencer, BoutonRevanche;
+    MediaPlayer musique;
     private LinearLayout grille;
     public TextView vuePlateau[][];
     public Jeu jeuMulti;
     final int hauteur = 6;
     final int largeur = 7;
-    public int tempsEcoule;
-    Timer temps;
-    TimerTask timerTask;
-    Handler handler;
+    public boolean partieTerminee = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,21 +40,41 @@ public class Activity_Multi extends Activity {
         imageJoueur2 = (ImageView) findViewById(R.id.imageJoueur2);
 
         //Recommencer une partie
-        ButtonRecommencerMulti = (Button) findViewById(R.id.recommencerMulti);
-        ButtonRecommencerMulti.setOnClickListener(new View.OnClickListener() {
+        BoutonRecommencer = (Button) findViewById(R.id.recommencer);
+        BoutonRecommencer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
-                    InitialiserNouvelleGrille();
+                    reinitialiserGrilleVide();
                     jeuMulti.demarrerPartie();
+                    changerImagesJoueurs();
+                    actualiserScores();
+                    if (BoutonRevanche.getVisibility() == View.VISIBLE) {
+                        BoutonRevanche.setVisibility(View.INVISIBLE);
+                        initialiserGrilleListener();
+                    }
                 }
         });
 
-				vuePlateau = new TextView[hauteur][largeur];
+        //Partie revanche
+        BoutonRevanche = (Button) findViewById(R.id.revanche);
+        BoutonRevanche.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reinitialiserGrilleVide();
+                jeuMulti.nouvellePartie();
+                jeuMulti.demarrerPartie();
+                BoutonRevanche.setVisibility(View.INVISIBLE);
+                changerImagesJoueurs();
+                initialiserGrilleListener();
+            }
+        });
+
+        vuePlateau = new TextView[hauteur][largeur];
         grille = (LinearLayout) findViewById(R.id.grille);
 
-				musique = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
-				musique.start();
+        musique = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
+        musique.start();
 
         // initialisation de la partie modele
         jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur2.getText().toString());
@@ -71,56 +82,23 @@ public class Activity_Multi extends Activity {
         changerImagesJoueurs();
         actualiserScores();
 
+        // initialisation de la grille
         for (int i = hauteur-1; i >= 0; i--) {
             LinearLayout ligne = new LinearLayout(this);
             ligne.setOrientation(LinearLayout.HORIZONTAL);
-            final int ligneIndex = i;
             for (int j = 0; j < largeur; j++) {
-                final int colonneIndex = j;
                 vuePlateau[i][j] = new TextView(this);
                 vuePlateau[i][j]
-                        .setLayoutParams(new LinearLayout.LayoutParams(
-                                ViewGroup.LayoutParams.WRAP_CONTENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+                    .setLayoutParams(new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.WRAP_CONTENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT, 1));
                 vuePlateau[i][j]
-                        .setBackgroundResource(R.drawable.case_vide);
-
-								//Ajoute un clickListener sur le plateau de jeu
-								vuePlateau[i][j]
-												.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        int caseDispo = jeuMulti.determinerCaseDisponible(colonneIndex);
-                                                        if (caseDispo < hauteur) {
-                                                            if (jeuMulti.placerPion(colonneIndex, caseDispo) == "jaune") {
-                                                                vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionjaune);
-                                                            } else {
-                                                                vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
-                                                            }
-                                                            if (jeuMulti.determinerVictoire() == 0) {
-                                                                jeuMulti.joueurSuivant();
-                                                                changerImagesJoueurs();
-                                                            } else {
-                                                                //messagePopUp();
-																																musique = MediaPlayer.create(Activity_Multi.this, R.raw.whatwasthat);
-																																musique.start();
-                                                                Toast.makeText(getApplicationContext(),
-																																				jeuMulti.afficherVainqueur() + " a gagné la partie. Une nouvelle partie commencera dans " + String.valueOf(tempsEcoule), Toast.LENGTH_LONG)
-                                                                        .show();
-
-                                                            actualiserScores();
-                                                            InitialiserNouvelleGrille();
-                                                            jeuMulti.nouvellePartie();
-                                                            jeuMulti.demarrerPartie();
-                                                        }
-                                                    }
-                                                }
-            });
-
+                    .setBackgroundResource(R.drawable.case_vide);
                 ligne.addView(vuePlateau[i][j]);
             }
             grille.addView(ligne);
         }
+        initialiserGrilleListener();
     }
 
     public void actualiserScores() {
@@ -138,7 +116,49 @@ public class Activity_Multi extends Activity {
         }
     }
 
-    public void InitialiserNouvelleGrille() {
+    public void initialiserGrilleListener() {
+        for (int i = hauteur-1; i >= 0; i--) {
+            for (int j = 0; j < largeur; j++) {
+                final int colonneIndex = j;
+                vuePlateau[i][j].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int caseDispo = jeuMulti.determinerCaseDisponible(colonneIndex);
+                        if (caseDispo < hauteur) {
+                            if (jeuMulti.placerPion(colonneIndex, caseDispo) == "jaune") {
+                                vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionjaune);
+                            } else {
+                                vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
+                            }
+                            if (jeuMulti.determinerVictoire() == 0) {
+                                jeuMulti.joueurSuivant();
+                                changerImagesJoueurs();
+                            } else {
+                                musique = MediaPlayer.create(Activity_Multi.this, R.raw.whatwasthat);
+                                musique.start();
+                                Toast.makeText(getApplicationContext(),
+                                        jeuMulti.afficherVainqueur() + " a gagné la partie !", Toast.LENGTH_LONG)
+                                        .show();
+                                actualiserScores();
+                                BoutonRevanche.setVisibility(View.VISIBLE);
+                                desactiverGrilleListener();
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    public void desactiverGrilleListener() {
+        for (int i = hauteur-1; i >= 0; i--) {
+            for (int j = 0; j < largeur; j++) {
+                vuePlateau[i][j].setOnClickListener(null);
+            }
+        }
+    }
+
+    public void reinitialiserGrilleVide() {
         for (int i = hauteur-1; i >= 0; i--) {
             for (int j = 0; j < largeur; j++) {
                 final int colonneIndex = j;
@@ -146,29 +166,6 @@ public class Activity_Multi extends Activity {
                         .setBackgroundResource(R.drawable.case_vide);
             }
         }
-    }
-
-    public void messagePopUp() {
-        temps = new Timer();
-        handler = new Handler();
-        tempsEcoule = 3;
-        final String nomVainqueur = jeuMulti.afficherVainqueur();
-
-        timerTask = new TimerTask() {
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        tempsEcoule--;
-                        if (tempsEcoule == 0) return;
-                        Toast.makeText(getApplicationContext(),
-                                 nomVainqueur + " a gagné la partie. Une nouvelle partie commencera dans " + String.valueOf(tempsEcoule), Toast.LENGTH_LONG)
-                                        .show();
-                    }
-                });
-            }
-        };
-
-        temps.schedule(timerTask, 0, 1000);
     }
 }
 
