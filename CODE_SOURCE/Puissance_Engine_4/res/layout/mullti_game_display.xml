@@ -84,7 +84,7 @@
         <Button android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/recommencer"
-                android:text="Recommencer"
+                android:text="Réinitialiser"
                 android:layout_weight="3"
                 android:textSize="15pt" />
 
@@ -98,7 +98,7 @@
         <Button android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/revanche"
-                android:text="Lancer la revanche"
+                android:text="Revanche !!"
                 android:layout_weight="3"
                 android:textSize="15pt"
                 android:visibility="invisible"/>

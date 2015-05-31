@@ -73,8 +73,8 @@ public class Activity_Multi extends Activity {
         vuePlateau = new TextView[hauteur][largeur];
         grille = (LinearLayout) findViewById(R.id.grille);
 
-        musique = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
-        musique.start();
+        //musique = MediaPlayer.create(Activity_Multi.this, R.raw.ratata);
+        //musique.start();
 
         // initialisation de la partie modele
         jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
