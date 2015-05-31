@@ -79,7 +79,7 @@ public class Activity_IA extends Activity {
 		vuePlateau = new TextView[hauteur][largeur];
 		grille = (LinearLayout) findViewById(R.id.grille);
 
-		musique = MediaPlayer.create(Activity_IA.this, R.raw.ratata);
+		musique = MediaPlayer.create(Activity_IA.this, R.raw.accepted);
 		musique.start();
 
 		// initialisation de la partie modele
@@ -126,12 +126,10 @@ public class Activity_IA extends Activity {
 								jeu.joueurSuivant();
 								gererTourIA();
 							} else {
-								musique = MediaPlayer.create(Activity_IA.this, R.raw.whatwasthat);
-								musique.start();
 								Toast.makeText(getApplicationContext(),
 										jeu.afficherVainqueur() + " a gagné la partie !", Toast.LENGTH_LONG)
 										.show();
-								actualiserScores();
+																	actualiserScores();
 								BoutonRevanche.setVisibility(View.VISIBLE);
 								desactiverGrilleListener();
 							}
@@ -149,7 +147,7 @@ public class Activity_IA extends Activity {
 		if (jeu.determinerVictoire() == 0) {
 			jeu.joueurSuivant();
 		} else {
-			musique = MediaPlayer.create(Activity_IA.this, R.raw.whatwasthat);
+			musique = MediaPlayer.create(Activity_IA.this, R.raw.baby);
 			musique.start();
 			Toast.makeText(getApplicationContext(),
 					jeu.afficherVainqueur() + " a gagné la partie !", Toast.LENGTH_LONG)
