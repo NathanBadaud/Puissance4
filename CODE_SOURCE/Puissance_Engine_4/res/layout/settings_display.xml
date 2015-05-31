@@ -13,18 +13,14 @@
             android:layout_gravity="center"
             android:gravity="center"
             />
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Musique"
-            android:id="@+id/buttonMusique"
-            android:layout_gravity="center"/>
-    <Button
+
+    <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Son"
-            android:id="@+id/buttonSong"
+            android:id="@+id/switch_son"
             android:layout_gravity="center_horizontal"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,13 +35,5 @@
             android:id="@+id/buttonAbout"
             android:layout_gravity="center_horizontal"
             />
-
-    <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Son_test"
-            android:id="@+id/switch_son_1"
-            android:layout_gravity="center_horizontal"/>
-
 
 </LinearLayout>
