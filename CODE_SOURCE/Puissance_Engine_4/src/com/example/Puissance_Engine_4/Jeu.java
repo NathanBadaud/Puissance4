@@ -53,7 +53,10 @@ public class Jeu {
 
 		public void demarrerPartie() {
 			joueurs[0].actif = joueurUnCommence;
-			joueurs[1].actif = !joueurUnCommence;
+			if (jeuSolo)
+				bot.actif = !joueurUnCommence;
+			else
+				joueurs[1].actif = !joueurUnCommence;
 		}
 
 		public int determinerCaseDisponible(int colonne) {

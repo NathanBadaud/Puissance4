@@ -44,7 +44,7 @@ public class Activity_Multi extends Activity {
         BoutonRecommencer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
+                    jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur2.getText().toString());
                     reinitialiserGrilleVide();
                     jeuMulti.demarrerPartie();
                     changerImagesJoueurs();
@@ -77,7 +77,7 @@ public class Activity_Multi extends Activity {
         musique.start();
 
         // initialisation de la partie modele
-        jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur2.getText().toString());
+        jeuMulti = new Jeu(hauteur, largeur, nomJoueur1.getText().toString(), nomJoueur1.getText().toString());
         jeuMulti.demarrerPartie();
         changerImagesJoueurs();
         actualiserScores();
