@@ -10,14 +10,15 @@ public class Jeu {
 		public int dernierPionY;
 		public Plateau plateau;
 		public Joueur[] joueurs;
+		public IA bot;
 
 		//Constructeur
 		public Jeu(int hauteur, int largeur, String nomJoueur1, String nomJoueur2) {
 			tour = 1;
 			plateau = new Plateau(hauteur, largeur);
 			joueurs = new Joueur[2];
-			joueurs[0] = new Joueur(nomJoueur1, "jaune", hauteur*largeur/2);
-			joueurs[1] = new Joueur(nomJoueur2, "rouge", hauteur*largeur/2);
+			joueurs[0] = new Joueur(this, nomJoueur1, "jaune", hauteur*largeur/2);
+			joueurs[1] = new Joueur(this, nomJoueur2, "rouge", hauteur*largeur/2);
 			joueurUnCommence = true;
 			jeuSolo = false;
 		}
@@ -26,8 +27,9 @@ public class Jeu {
 			tour = 1;
 			plateau = new Plateau(hauteur, largeur);
 			joueurs = new Joueur[2];
-			joueurs[0] = new Joueur(nomJoueur, "jaune", hauteur*largeur/2);
-			joueurs[1] = new IA("Ordinateur", "rouge", hauteur*largeur/2);
+			joueurs[0] = new Joueur(this, nomJoueur, "jaune", hauteur*largeur/2);
+			bot = new IA(this, "Ordinateur", "rouge", hauteur*largeur/2);
+			joueurs[1] = bot;
 			joueurUnCommence = true;
 			jeuSolo = true;
 		}
@@ -83,10 +85,6 @@ public class Jeu {
 			}
 		}
 
-		public void affichageGraphique() {
-
-		}
-
 		public int caseMemeProprietaire(int positionX, int positionY) {
 			if (plateau.colonnes[dernierPionX].cases[dernierPionY].proprietaire ==  plateau.colonnes[positionX].cases[positionY].proprietaire)
 				return 1;
@@ -95,7 +93,7 @@ public class Jeu {
 		}
 
 		public String afficherVainqueur() {
-			Joueur vainqueur = plateau.colonnes[dernierPionX].cases[dernierPionY].proprietaire;
+			Joueur vainqueur = joueurActif();
 			vainqueur.score += 1;
 			return vainqueur.nom;
 		}
@@ -108,7 +106,6 @@ public class Jeu {
 					+caseMemeProprietaire(dernierPionX, dernierPionY - 3)
 					== 3)
 					return 1;
-
 			}
 
 			// victoires horizontales

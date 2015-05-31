@@ -69,6 +69,9 @@ public class Activity_IA extends Activity {
 				jeu.nouvellePartie();
 				jeu.demarrerPartie();
 				BoutonRevanche.setVisibility(View.INVISIBLE);
+				if (jeu.joueurActif() == jeu.bot){
+					gererTourIA();
+				}
 				initialiserGrilleListener();
 			}
 		});
@@ -105,7 +108,7 @@ public class Activity_IA extends Activity {
 
 	public void actualiserScores() {
 		scoreJoueur.setText(Integer.toString(jeu.joueurs[0].score));
-		scoreIA.setText(Integer.toString(jeu.joueurs[1].score));
+		scoreIA.setText(Integer.toString(jeu.bot.score));
 	}
 
 	public void initialiserGrilleListener() {
@@ -117,13 +120,11 @@ public class Activity_IA extends Activity {
 					public void onClick(View view) {
 						int caseDispo = jeu.determinerCaseDisponible(colonneIndex);
 						if (caseDispo < hauteur) {
-							if (jeu.placerPion(colonneIndex, caseDispo) == "jaune") {
-								vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionjaune);
-							} else {
-								vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionrouge);
-							}
+							jeu.placerPion(colonneIndex, caseDispo);
+							vuePlateau[caseDispo][colonneIndex].setBackgroundResource(R.drawable.pionjaune);
 							if (jeu.determinerVictoire() == 0) {
 								jeu.joueurSuivant();
+								gererTourIA();
 							} else {
 								musique = MediaPlayer.create(Activity_IA.this, R.raw.whatwasthat);
 								musique.start();
@@ -138,6 +139,24 @@ public class Activity_IA extends Activity {
 					}
 				});
 			}
+		}
+	}
+
+	public void gererTourIA() {
+		int[] coordonnees = new int[2];
+		coordonnees = jeu.bot.placementPion();
+		vuePlateau[coordonnees[1]][coordonnees[0]].setBackgroundResource(R.drawable.pionrouge);
+		if (jeu.determinerVictoire() == 0) {
+			jeu.joueurSuivant();
+		} else {
+			musique = MediaPlayer.create(Activity_IA.this, R.raw.whatwasthat);
+			musique.start();
+			Toast.makeText(getApplicationContext(),
+					jeu.afficherVainqueur() + " a gagné la partie !", Toast.LENGTH_LONG)
+					.show();
+			actualiserScores();
+			BoutonRevanche.setVisibility(View.VISIBLE);
+			desactiverGrilleListener();
 		}
 	}
 
